@@ -114,15 +114,47 @@ public class linkedlist {
         static Node insertPosition(Node head,int position,int element){
             int pos=-1;
             Node temp=head;
+            if(position==0){
+                Node node=new Node(element);
+                head=node;
+                head.next=temp;
+                return head;
+            }
             while(temp!=null){
                 pos+=1;
-                if(pos==(position)){
+                if(pos==(position-1)){
                     Node node=new Node(element);
                     Node res=temp.next;
                     temp.next=node;
                     node.next=res;
+                    return head;
                 }
                 temp=temp.next;
+            }
+            if(position>(pos+1)){
+                System.out.println("Invalid position");
+            }
+            return head;
+        }
+        static Node deletePosition(Node head,int Position){
+            Node temp=head;
+            int pos=-1;
+            if(Position==0){
+                if(head == null){
+                    return null;
+                }
+                return head.next;
+            }
+            while(temp!=null){
+                pos+=1;
+                if(Position>0){
+                    if(pos==(Position-1)){
+                        Node res=temp.next.next;
+                        temp.next=res;
+                        return head;
+                    }
+                    temp=temp.next;
+                }
             }
             return head;
         }
@@ -169,14 +201,20 @@ public class linkedlist {
                 head = head.next;
             }
             System.out.println();
-            Node result=findMiddle(head);
-            System.out.println(result.data);
-            head =reverse(head);
-            while(head != null){
+            head=deletePosition(head,2);
+            while(head!= null){
                 System.out.print(head.data + " ");
-                head=head.next;
+                head = head.next;
             }
             System.out.println();
+//            Node result=findMiddle(head);
+//            System.out.println(result.data);
+//            head =reverse(head);
+//            while(head != null){
+//                System.out.print(head.data + " ");
+//                head=head.next;
+//            }
+//            System.out.println();
 
         }
 }
